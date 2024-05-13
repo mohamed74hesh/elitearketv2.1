@@ -1,4 +1,3 @@
-
 import 'package:elitemarketv2/constants/global_variables.dart';
 import 'package:elitemarketv2/features/home/widgets/address_box.dart';
 import 'package:elitemarketv2/features/home/widgets/carousel_image.dart';
@@ -75,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 1,
                           ),
                         ),
-                        hintText: 'Search Amazon.in',
+                        hintText: "Serearch In ${appname}",
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 17,
@@ -97,13 +96,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: const SingleChildScrollView(
         child: Column(
-          children:  [
+          children: [
             AddressBox(),
             SizedBox(height: 10),
             TopCategories(),
             SizedBox(height: 10),
-            CarouselImage(),
-            DealOfDay(),
+            // CarouselImage(),
+            // DealOfDay(),
           ],
         ),
       ),
