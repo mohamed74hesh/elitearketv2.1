@@ -45,7 +45,7 @@ class _AdminScreenState extends State<AdminScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                alignment: Alignment.topLeft,
+                alignment: Alignment.center,
                 child: 
                 Image.asset(
                   'assets/images/amazon_in.png',

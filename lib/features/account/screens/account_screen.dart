@@ -24,10 +24,10 @@ class AccountScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                alignment: Alignment.topLeft,
+                alignment: Alignment.center,
                 child: Image.asset(
                   'assets/images/amazon_in.png',
-                  width: 369,
+                  width: 370,
                   height: 130,
                   color: Colors.black,
                 ),

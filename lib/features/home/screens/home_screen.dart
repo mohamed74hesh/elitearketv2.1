@@ -1,10 +1,17 @@
+import 'package:elitemarketv2/common/widgets/loader.dart';
 import 'package:elitemarketv2/constants/global_variables.dart';
+import 'package:elitemarketv2/features/account/widgets/single_product.dart';
 import 'package:elitemarketv2/features/home/widgets/address_box.dart';
 import 'package:elitemarketv2/features/home/widgets/carousel_image.dart';
 import 'package:elitemarketv2/features/home/widgets/deal_of_day.dart';
 import 'package:elitemarketv2/features/home/widgets/top_categories.dart';
+import 'package:elitemarketv2/features/product_details/screens/product_details_screen.dart';
 import 'package:elitemarketv2/features/search/screens/search_screen.dart';
+import 'package:elitemarketv2/features/search/widget/searched_product.dart';
+import 'package:elitemarketv2/models/product.dart';
 import 'package:flutter/material.dart';
+
+import '../../admin/services/admin_services.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
@@ -15,6 +22,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+    List<Product>? products;
+  final AdminServices adminServices = AdminServices();
+  @override
+  void initState() {
+    super.initState();
+    fetchAllProducts();
+  }
+
+  fetchAllProducts() async {
+    products = await adminServices.fetchAllProducts(context);
+    setState(() {});
+  }
+
+
+
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
@@ -94,18 +116,93 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            AddressBox(),
-            SizedBox(height: 10),
-            TopCategories(),
-            SizedBox(height: 10),
-             CarouselImage(),
-             DealOfDay(),
-          ],
+       body: 
+      // products == null
+      //     ? const Loader()
+           Column(
+              children: [
+                // const AddressBox(),
+                const SizedBox(height: 10),
+              const  TopCategories(),
+            const SizedBox(height: 10),
+             const CarouselImage(),
+             products == null
+          ? const Loader()
+          :
+
+
+                Expanded(
+                  child: GridView.builder(
+              itemCount: products!.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2),
+              itemBuilder: (context, index) {
+                final productData = products![index];
+                return Column(
+                  children: [
+                    SizedBox(
+                      height: 140,
+                      child: SingleProduct(
+                        image: productData.images[0],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            productData.name,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                        // IconButton(
+                        //   onPressed: () => deleteProduct(productData, index),
+                        //   icon: const Icon(
+                        //     Icons.delete_outline,
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                  ],
+                );
+              },
+            ),
+                ),
+              ],
+
+          
+
+
+
+
+
+
+          
+        
+             
+
+
+             
+             
+
+
+
+             
+            
+          
         ),
-      ),
+        
+
+
+
+    
+      
+
+
+
+
+
     );
   }
 }

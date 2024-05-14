@@ -26,6 +26,8 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+String type = 'user';
+
 
   @override
   void dispose() {
@@ -41,8 +43,14 @@ class _AuthScreenState extends State<AuthScreen> {
       email: _emailController.text,
       password: _passwordController.text,
       name: _nameController.text,
+      type:type,
     );
   }
+  List<String> usertype = [
+    'user',
+    'Admin'
+    
+  ];
 
   void signInUser() {
     authService.signInUser(
@@ -112,6 +120,27 @@ class _AuthScreenState extends State<AuthScreen> {
                           controller: _passwordController,
                           hintText: 'Password',
                         ),
+                        SizedBox(
+                  width: double.infinity,
+                  child: DropdownButton(
+                    value: type,
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    items: usertype.map((String item) {
+                      return DropdownMenuItem(
+                        value: item,
+                        child: Text(item),
+                      );
+                    }).toList(),
+                    onChanged: (String? newVal) {
+                      setState(() {
+                        type = newVal!;
+                      });
+                    },
+                  ),
+                ),
+
+
+
                         const SizedBox(height: 10),
                         CustomButton(
                           text: 'Sign Up',

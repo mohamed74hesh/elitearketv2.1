@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
-String uri = 'https://elitearketv2-1.onrender.com';
+String uri = 'https://elitemarket-v2-8.onrender.com';
 String appname = "EliteMarket";
+const slider1 = "assets/images/slider1.jpeg";
+const slider2 = "assets/images/slider2.jpg";
+const slider3 = "assets/images/slider3.jpg";
+const sliderlist = [slider1,slider2,slider3];
 
 class GlobalVariables {
-   
   // COLORS
   static const appBarGradient = LinearGradient(
     colors: [
       Color.fromRGBO(230, 46, 4, 1),
       Color.fromRGBO(230, 46, 4, 1),
     ],
-    stops: [0.5, 1.0],
+    stops: [2.0, 1.0],
   );
 
   static const secondaryColor = Color.fromRGBO(255, 153, 0, 1);
@@ -22,11 +25,10 @@ class GlobalVariables {
 
   // STATIC IMAGES
   static const List<String> carouselImages = [
-    'https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/WLA/TS/D37847648_Accessories_savingdays_Jan22_Cat_PC_1500.jpg',
-    'https://images-eu.ssl-images-amazon.com/images/G/31/img2021/Vday/bwl/English.jpg',
-    'https://images-eu.ssl-images-amazon.com/images/G/31/img22/Wireless/AdvantagePrime/BAU/14thJan/D37196025_IN_WL_AdvantageJustforPrime_Jan_Mob_ingress-banner_1242x450.jpg',
-    'https://images-na.ssl-images-amazon.com/images/G/31/Symbol/2020/00NEW/1242_450Banners/PL31_copy._CB432483346_.jpg',
-    'https://images-na.ssl-images-amazon.com/images/G/31/img21/shoes/September/SSW/pc-header._CB641971330_.jpg',
+    "assets/images/slider1.jpeg",
+    "assets/images/slider2.jpg",
+    "assets/images/slider3.jpg",
+    
   ];
 
   static const List<Map<String, String>> categoryImages = [
