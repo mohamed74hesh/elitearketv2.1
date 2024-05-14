@@ -48,7 +48,7 @@ String type = 'user';
   }
   List<String> usertype = [
     'user',
-    'Admin'
+    'admin'
     
   ];
 

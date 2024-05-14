@@ -1,6 +1,7 @@
 import 'package:elitemarketv2/common/widgets/loader.dart';
 import 'package:elitemarketv2/constants/global_variables.dart';
 import 'package:elitemarketv2/features/account/widgets/single_product.dart';
+import 'package:elitemarketv2/features/home/services/home_services.dart';
 import 'package:elitemarketv2/features/home/widgets/address_box.dart';
 import 'package:elitemarketv2/features/home/widgets/carousel_image.dart';
 import 'package:elitemarketv2/features/home/widgets/deal_of_day.dart';
@@ -23,7 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
     List<Product>? products;
-  final AdminServices adminServices = AdminServices();
+  final HomeServices homeServices = HomeServices();
   @override
   void initState() {
     super.initState();
@@ -31,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   fetchAllProducts() async {
-    products = await adminServices.fetchAllProducts(context);
+    products = await homeServices.fetchAllProducts(context);
     setState(() {});
   }
 

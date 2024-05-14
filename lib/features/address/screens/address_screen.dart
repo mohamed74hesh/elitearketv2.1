@@ -97,8 +97,8 @@ class _AddressScreenState extends State<AddressScreen> {
       } else {
         throw Exception('Please enter all the values!');
       }
-    } else if (addressFromProvider.isNotEmpty) {
-      addressToBeUsed = addressFromProvider;
+    // } else if (addressFromProvider.isNotEmpty) {
+    //   addressToBeUsed = addressFromProvider;
     } else {
       showSnackBar(context, 'ERROR');
     }
@@ -196,6 +196,8 @@ class _AddressScreenState extends State<AddressScreen> {
               const SizedBox(height: 10),
               GooglePayButton(
                 onPressed: () {
+                  addressToBeUsed =
+            '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
                   if (Provider.of<UserProvider>(context, listen: false)
         .user
         .address

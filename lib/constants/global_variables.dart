@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-String uri = 'https://elitemarket-v2-8.onrender.com';
+String uri = 'https://elitearketv2-1-1.onrender.com';
+String url = 'https://elitemarket-v2-8.onrender.com';
 String appname = "EliteMarket";
 const slider1 = "assets/images/slider1.jpeg";
 const slider2 = "assets/images/slider2.jpg";
 const slider3 = "assets/images/slider3.jpg";
-const sliderlist = [slider1,slider2,slider3];
+const sliderlist = [slider1, slider2, slider3];
 
 class GlobalVariables {
   // COLORS
@@ -28,7 +29,6 @@ class GlobalVariables {
     "assets/images/slider1.jpeg",
     "assets/images/slider2.jpg",
     "assets/images/slider3.jpg",
-    
   ];
 
   static const List<Map<String, String>> categoryImages = [

@@ -102,25 +102,25 @@ class _AdminScreenState extends State<AdminScreen> {
             label: '',
           ),
           // ANALYTICS
-          BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 1
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
-                    width: bottomBarBorderWidth,
-                  ),
-                ),
-              ),
-              child: const Icon(
-                Icons.analytics_outlined,
-              ),
-            ),
-            label: '',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Container(
+          //     width: bottomBarWidth,
+          //     decoration: BoxDecoration(
+          //       border: Border(
+          //         top: BorderSide(
+          //           color: _page == 1
+          //               ? GlobalVariables.selectedNavBarColor
+          //               : GlobalVariables.backgroundColor,
+          //           width: bottomBarBorderWidth,
+          //         ),
+          //       ),
+          //     ),
+          //     child: const Icon(
+          //       Icons.analytics_outlined,
+          //     ),
+          //   ),
+          //   label: '',
+          // ),
           // ORDERS
           BottomNavigationBarItem(
             icon: Container(
@@ -128,7 +128,7 @@ class _AdminScreenState extends State<AdminScreen> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _page == 2
+                    color: _page == 1
                         ? GlobalVariables.selectedNavBarColor
                         : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
