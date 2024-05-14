@@ -15,7 +15,7 @@ class BelowAppBar extends StatelessWidget {
       decoration: const BoxDecoration(
         gradient: GlobalVariables.appBarGradient,
       ),
-      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+      padding: const EdgeInsets.only(left: 130, right: 10, bottom: 10),
       child: Row(
         children: [
           RichText(
@@ -30,7 +30,7 @@ class BelowAppBar extends StatelessWidget {
                   text: user.name,
                   style: const TextStyle(
                     fontSize: 22,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.w600,
                   ),
                 ),

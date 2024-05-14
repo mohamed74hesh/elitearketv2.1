@@ -27,31 +27,31 @@ class AccountScreen extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: Image.asset(
                   'assets/images/amazon_in.png',
-                  width: 120,
-                  height: 45,
+                  width: 369,
+                  height: 130,
                   color: Colors.black,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.only(left: 15, right: 15),
-                child: Row(
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.only(right: 15),
-                      child: Icon(Icons.notifications_outlined),
-                    ),
-                    Icon(
-                      Icons.search,
-                    ),
-                  ],
-                ),
-              )
+              // Container(
+              //   padding: const EdgeInsets.only(left: 15, right: 15),
+              //   child: Row(
+              //     children: const [
+              //       Padding(
+              //         padding: EdgeInsets.only(right: 15),
+              //         child: Icon(Icons.notifications_outlined),
+              //       ),
+              //       Icon(
+              //         Icons.search,
+              //       ),
+              //     ],
+              //   ),
+              // )
             ],
           ),
         ),
       ),
-      body: Column(
-        children: const [
+      body: const Column(
+        children:  [
           BelowAppBar(),
           SizedBox(height: 10),
           TopButtons(),

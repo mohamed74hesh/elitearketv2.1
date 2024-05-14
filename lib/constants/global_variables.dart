@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String uri = 'https://elitemarket-v2-8.onrender.com';
+String uri = 'https://elitearketv2-1.onrender.com';
 String appname = "EliteMarket";
 
 class GlobalVariables {

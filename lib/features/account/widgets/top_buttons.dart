@@ -29,10 +29,10 @@ class TopButtons extends StatelessWidget {
               text: 'Log Out',
               onTap: () => AccountServices().logOut(context),
             ),
-            AccountButton(
-              text: 'Your Wish List',
-              onTap: () {},
-            ),
+            // AccountButton(
+            //   text: 'Your Wish List',
+            //   onTap: () {},
+            // ),
           ],
         ),
       ],
