@@ -101,12 +101,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               ),
-              Container(
-                color: Colors.transparent,
-                height: 42,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(Icons.mic, color: Colors.black, size: 25),
-              ),
+              
             ],
           ),
         ),
@@ -121,7 +116,7 @@ class _CartScreenState extends State<CartScreen> {
               child: CustomButton(
                 text: 'Proceed to Buy (${user.cart.length} items)',
                 onTap: () => navigateToAddress(sum),
-                color: Colors.yellow[600],
+                color:Color.fromRGBO(255, 168, 0, 1),
               ),
             ),
             const SizedBox(height: 15),

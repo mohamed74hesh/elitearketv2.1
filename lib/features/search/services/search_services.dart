@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:elitemarketv2/constants/error_handling.dart';
 import 'package:elitemarketv2/constants/global_variables.dart';

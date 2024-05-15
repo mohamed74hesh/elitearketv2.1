@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
         colorScheme: const ColorScheme.light(
-          primary: GlobalVariables.secondaryColor,
+          primary: Color.fromRGBO(230, 46, 4, 1),
         ),
         appBarTheme: const AppBarTheme(
           elevation: 0,

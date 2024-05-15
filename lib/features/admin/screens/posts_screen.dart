@@ -58,8 +58,9 @@ class _PostsScreenState extends State<PostsScreen> {
                     SizedBox(
                       height: 140,
                       child: SingleProduct(
+                        
                         image: productData.images[0],
-                      ),
+                      ), 
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

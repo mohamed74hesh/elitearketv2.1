@@ -215,20 +215,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               color: Colors.black12,
               height: 5,
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: CustomButton(
-                text: 'Buy Now',
-                onTap: () {},
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(10),
+            //   child: CustomButton(
+            //     text: 'Buy Now',
+            //     onTap: () {},
+            //   ),
+            // ),
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(10),
               child: CustomButton(
                 text: 'Add to Cart',
                 onTap: addToCart,
-                color: const Color.fromRGBO(254, 216, 19, 1),
+                color: const Color.fromRGBO(255, 168, 0, 1),
               ),
             ),
             const SizedBox(height: 10),

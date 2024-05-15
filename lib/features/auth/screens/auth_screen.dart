@@ -80,7 +80,7 @@ String type = 'user';
               ListTile(
                 tileColor: _auth == Auth.signup
                     ? GlobalVariables.backgroundColor
-                    : GlobalVariables.greyBackgroundCOlor,
+                    : Color.fromRGBO(230, 46, 4, 1),
                 title: const Text(
                   'Create Account',
                   style: TextStyle(
@@ -88,7 +88,7 @@ String type = 'user';
                   ),
                 ),
                 leading: Radio(
-                  activeColor: GlobalVariables.secondaryColor,
+                  activeColor: Color.fromRGBO(230, 46, 4, 1),
                   value: Auth.signup,
                   groupValue: _auth,
                   onChanged: (Auth? val) {
@@ -165,7 +165,7 @@ String type = 'user';
                   ),
                 ),
                 leading: Radio(
-                  activeColor: GlobalVariables.secondaryColor,
+                  activeColor: Color.fromRGBO(230, 46, 4, 1),
                   value: Auth.signin,
                   groupValue: _auth,
                   onChanged: (Auth? val) {

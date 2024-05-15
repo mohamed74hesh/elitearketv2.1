@@ -1,8 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:elitemarketv2/common/widgets/bottom_bar.dart';
 import 'package:elitemarketv2/constants/error_handling.dart';
 import 'package:elitemarketv2/constants/global_variables.dart';
 import 'package:elitemarketv2/constants/utils.dart';
+import 'package:elitemarketv2/features/admin/screens/admin_screen.dart';
 import 'package:elitemarketv2/models/user.dart';
 import 'package:elitemarketv2/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +13,6 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-
 
 class AuthService {
   // sign up user
@@ -80,11 +82,17 @@ class AuthService {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            BottomBar.routeName,
-            (route) => false,
-          );
+          Provider.of<UserProvider>(context,listen: false).user.type == 'user'
+              ? Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  BottomBar.routeName,
+                  (route) => false,
+                )
+              : Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  AdminScreen.routeName,
+                  (route) => false,
+                );
         },
       );
     } catch (e) {

@@ -46,7 +46,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   ];
 
   void sellProduct() {
-    if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
+    if (_addProductFormKey.currentState!.validate() ) {
       adminServices.sellProduct(
         context: context,
         name: productNameController.text,

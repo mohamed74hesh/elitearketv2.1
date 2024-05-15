@@ -12,14 +12,14 @@ class TopButtons extends StatelessWidget {
       children: [
         Row(
           children: [
-            AccountButton(
-              text: 'Your Orders',
-              onTap: () {},
-            ),
-            AccountButton(
-              text: 'Turn Seller',
-              onTap: () {},
-            ),
+            // AccountButton(
+            //   text: 'Your Orders',
+            //   onTap: () {},
+            // ),
+            // AccountButton(
+            //   text: 'Turn Seller',
+            //   onTap: () {},
+            // ),
           ],
         ),
         const SizedBox(height: 10),

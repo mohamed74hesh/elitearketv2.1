@@ -1,5 +1,6 @@
 import 'package:elitemarketv2/common/widgets/loader.dart';
 import 'package:elitemarketv2/constants/global_variables.dart';
+import 'package:elitemarketv2/constants/utils.dart';
 import 'package:elitemarketv2/features/account/widgets/single_product.dart';
 import 'package:elitemarketv2/features/home/services/home_services.dart';
 import 'package:elitemarketv2/features/home/widgets/address_box.dart';
@@ -23,7 +24,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-    List<Product>? products;
+  List<Product>? products;
   final HomeServices homeServices = HomeServices();
   @override
   void initState() {
@@ -36,9 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-
-
   void navigateToSearchScreen(String query) {
+    if (query == null) {
+      
+      
+    }
+  
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
 
@@ -107,103 +111,88 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Container(
-                color: Colors.transparent,
-                height: 42,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(Icons.mic, color: Colors.black, size: 25),
-              ),
+              
             ],
           ),
         ),
       ),
-       body: 
-      // products == null
-      //     ? const Loader()
-           Column(
-              children: [
-                // const AddressBox(),
-                const SizedBox(height: 10),
-              const  TopCategories(),
-            const SizedBox(height: 10),
-             const CarouselImage(),
-             products == null
-          ? const Loader()
-          :
-
-
-                Expanded(
+      body:
+          // products == null
+          //     ? const Loader()
+          Column(
+        children: [
+          
+          const SizedBox(height: 10),
+          const TopCategories(),
+          const SizedBox(height: 10),
+          const CarouselImage(),
+          products == null
+              ? const Loader()
+              : Expanded(
                   child: GridView.builder(
-              itemCount: products!.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
-              itemBuilder: (context, index) {
-                final productData = products![index];
-                return Column(
-                  children: [
-                    SizedBox(
-                      height: 140,
-                      child: SingleProduct(
-                        image: productData.images[0],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            productData.name,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                          ),
+                    itemCount: products!.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                    itemBuilder: (context, index) {
+                      final product = products![index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            ProductDetailScreen.routeName,
+                            arguments: product,
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 130,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Image.network(
+                                    product.images[0],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.topLeft,
+                              padding: const EdgeInsets.only(
+                                left: 0,
+                                top: 5,
+                                right: 15,
+                              ),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    product.name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(
+                                    "${product.price} EG",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        // IconButton(
-                        //   onPressed: () => deleteProduct(productData, index),
-                        //   icon: const Icon(
-                        //     Icons.delete_outline,
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                  ],
-                );
-              },
-            ),
+                      );
+                    },
+                  ),
                 ),
-              ],
-
-          
-
-
-
-
-
-
-          
-        
-             
-
-
-             
-             
-
-
-
-             
-            
-          
-        ),
-        
-
-
-
-    
-      
-
-
-
-
-
+        ],
+      ),
     );
   }
 }

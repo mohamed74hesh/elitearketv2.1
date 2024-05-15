@@ -1,3 +1,4 @@
+import 'package:elitemarketv2/common/widgets/custom_button.dart';
 import 'package:elitemarketv2/common/widgets/custom_textfield.dart';
 import 'package:elitemarketv2/constants/global_variables.dart';
 import 'package:elitemarketv2/constants/utils.dart';
@@ -85,23 +86,7 @@ class _AddressScreenState extends State<AddressScreen> {
   void payPressed(String addressFromProvider) {
     addressToBeUsed = "";
 
-    bool isForm = flatBuildingController.text.isNotEmpty ||
-        areaController.text.isNotEmpty ||
-        pincodeController.text.isNotEmpty ||
-        cityController.text.isNotEmpty;
-
-    if (isForm) {
-      if (_addressFormKey.currentState!.validate()) {
-        addressToBeUsed =
-            '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
-      } else {
-        throw Exception('Please enter all the values!');
-      }
-    // } else if (addressFromProvider.isNotEmpty) {
-    //   addressToBeUsed = addressFromProvider;
-    } else {
-      showSnackBar(context, 'ERROR');
-    }
+    
   }
 
   @override
@@ -196,20 +181,7 @@ class _AddressScreenState extends State<AddressScreen> {
               const SizedBox(height: 10),
               GooglePayButton(
                 onPressed: () {
-                  addressToBeUsed =
-            '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
-                  if (Provider.of<UserProvider>(context, listen: false)
-        .user
-        .address
-        .isEmpty) {
-      addressServices.saveUserAddress(
-          context: context, address: addressToBeUsed);
-    }
-    addressServices.placeOrder(
-      context: context,
-      address: addressToBeUsed,
-      totalSum: double.parse(widget.totalAmount),
-    );
+                  
 
                 },
                 // ignore: deprecated_member_use
@@ -224,6 +196,44 @@ class _AddressScreenState extends State<AddressScreen> {
                   child: CircularProgressIndicator(),
                 ),
               ),
+              Padding(
+              padding: const EdgeInsets.all(10),
+              child: CustomButton(
+                text: 'Place Order ',
+                onTap: (){
+                  bool isForm = flatBuildingController.text.isNotEmpty ||
+        areaController.text.isNotEmpty ||
+        pincodeController.text.isNotEmpty ||
+        cityController.text.isNotEmpty;
+
+    if (isForm) {
+      if (_addressFormKey.currentState!.validate()) {
+        addressToBeUsed =
+            '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
+      } else {
+        throw Exception('Please enter all the values!');
+      }
+    // } else if (addressFromProvider.isNotEmpty) {
+    //   addressToBeUsed = addressFromProvider;
+    } else {
+      showSnackBar(context, 'ERROR');
+    }
+                  if (Provider.of<UserProvider>(context, listen: false)
+        .user
+        .address
+        .isEmpty) {
+      addressServices.saveUserAddress(
+          context: context, address: addressToBeUsed);
+    }
+    addressServices.placeOrder(
+      context: context,
+      address: addressToBeUsed,
+      totalSum: double.parse(widget.totalAmount),
+    );
+                },
+                color: const Color.fromRGBO(230, 46, 4, 1),
+              ),
+            ),
             ],
           ),
         ),

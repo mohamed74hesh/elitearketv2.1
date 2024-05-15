@@ -1,4 +1,3 @@
-
 import 'package:elitemarketv2/constants/global_variables.dart';
 import 'package:elitemarketv2/features/account/services/account_services.dart';
 import 'package:elitemarketv2/features/account/widgets/account_button.dart';
@@ -7,6 +6,7 @@ import 'package:elitemarketv2/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatefulWidget {
+  static const String routeName = '/admin-screen';
   const AdminScreen({Key? key}) : super(key: key);
 
   @override
@@ -20,7 +20,6 @@ class _AdminScreenState extends State<AdminScreen> {
 
   List<Widget> pages = [
     const PostsScreen(),
-    
     const OrdersScreen(),
   ];
 
@@ -46,21 +45,17 @@ class _AdminScreenState extends State<AdminScreen> {
             children: [
               Container(
                 alignment: Alignment.center,
-                child: 
-                Image.asset(
+                child: Image.asset(
                   'assets/images/amazon_in.png',
                   width: 120,
                   height: 100,
                   color: Colors.black,
                 ),
-              
-
-                
               ),
-                AccountButton(
-              text: 'Log Out',
-              onTap: () => AccountServices().logOut(context),
-            ),
+              AccountButton(
+                text: 'Log Out',
+                onTap: () => AccountServices().logOut(context),
+              ),
               const Text(
                 'Admin',
                 style: TextStyle(
