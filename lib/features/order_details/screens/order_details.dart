@@ -36,7 +36,6 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     currentStep = widget.order.status;
   }
 
-  // !!! ONLY FOR ADMIN!!!
   void changeOrderStatus(int status) {
     adminServices.changeOrderStatus(
       context: context,

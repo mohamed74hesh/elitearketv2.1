@@ -6,7 +6,6 @@ import 'package:elitemarketv2/features/account/widgets/single_product.dart';
 import 'package:elitemarketv2/features/order_details/screens/order_details.dart';
 import 'package:elitemarketv2/models/order.dart';
 import 'package:flutter/material.dart';
-
 class Orders extends StatefulWidget {
   const Orders({Key? key}) : super(key: key);
 
@@ -83,9 +82,13 @@ class _OrdersState extends State<Orders> {
                           arguments: orders![index],
                         );
                       },
-                      child: SingleProduct(
-                        image: orders![index].products[0].images[0],
-                      ),
+                    child: orders![index].products.isNotEmpty && orders![index].products[0].images.isNotEmpty
+  ? SingleProduct(
+      image: orders![index].products[0].images[0],
+    )
+  : SingleProduct(
+      image: 'assets/images/amazon_in.png', // or some default image
+    ),
                     );
                   },
                 ),
@@ -94,3 +97,4 @@ class _OrdersState extends State<Orders> {
           );
   }
 }
+

@@ -1,9 +1,9 @@
-
 import 'package:elitemarketv2/common/widgets/custom_button.dart';
 import 'package:elitemarketv2/common/widgets/custom_textfield.dart';
 import 'package:elitemarketv2/constants/global_variables.dart';
 import 'package:elitemarketv2/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 enum Auth {
   signin,
@@ -26,31 +26,33 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-String type = 'user';
-
-
+  String type = 'user';
+  bool _isPasswordVisible = false;
+  BuildContext? _context;
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _context = context;
+  }
+
+   @override
   void dispose() {
-    super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+    super.dispose();
   }
-
   void signUpUser() {
     authService.signUpUser(
       context: context,
       email: _emailController.text,
       password: _passwordController.text,
       name: _nameController.text,
-      type:type,
+      type: type,
     );
   }
-  List<String> usertype = [
-    'user',
-    'admin'
-    
-  ];
+
+  List<String> usertype = ['user', 'admin'];
 
   void signInUser() {
     authService.signInUser(
@@ -63,45 +65,85 @@ String type = 'user';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalVariables.greyBackgroundCOlor,
+      
       body: SafeArea(
+    
         child: Padding(
           padding: const EdgeInsets.all(8.0),
+          
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                'Welcome',
+                'Welcome to Elite Mart',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w500,
+                  color: Colors.orange,
                 ),
               ),
-              ListTile(
-                tileColor: _auth == Auth.signup
-                    ? GlobalVariables.backgroundColor
-                    : Color.fromRGBO(230, 46, 4, 1),
-                title: const Text(
-                  'Create Account',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ListTile(
+                      tileColor: _auth == Auth.signup
+                          ? GlobalVariables.backgroundColor
+                          : Color.fromRGBO(230, 46, 4, 0.1),
+                      title: const Text(
+                        'Create Account',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      leading: Radio(
+                        activeColor: Color.fromRGBO(230, 46, 4, 1),
+                        value: Auth.signup,
+                        groupValue: _auth,
+                        onChanged: (Auth? val) {
+                          setState(() {
+                            _auth = val!;
+                          });
+                        },
+                      ),
+                    ),
                   ),
-                ),
-                leading: Radio(
-                  activeColor: Color.fromRGBO(230, 46, 4, 1),
-                  value: Auth.signup,
-                  groupValue: _auth,
-                  onChanged: (Auth? val) {
-                    setState(() {
-                      _auth = val!;
-                    });
-                  },
-                ),
+                  Expanded(
+                    child: ListTile(
+                      tileColor: _auth == Auth.signin
+                          ? GlobalVariables.backgroundColor
+                          : GlobalVariables.greyBackgroundCOlor,
+                      title: const Text(
+                        'Sign-In.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      leading: Radio(
+                        activeColor: Color.fromRGBO(230, 46, 4, 1),
+                        value: Auth.signin,
+                        groupValue: _auth,
+                        onChanged: (Auth? val) {
+                          setState(() {
+                            _auth = val!;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
+              const SizedBox(height: 20),
               if (_auth == Auth.signup)
                 Container(
                   padding: const EdgeInsets.all(8),
-                  color: GlobalVariables.backgroundColor,
+                  decoration: BoxDecoration(
+                    color: GlobalVariables.backgroundColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Form(
                     key: _signUpFormKey,
                     child: Column(
@@ -116,31 +158,72 @@ String type = 'user';
                           hintText: 'Email',
                         ),
                         const SizedBox(height: 10),
-                        CustomTextField(
+                        TextFormField(
                           controller: _passwordController,
-                          hintText: 'Password',
+                          obscureText: _isPasswordVisible,
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _isPasswordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.orange,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isPasswordVisible = !_isPasswordVisible;
+                                });
+                              },
+                            ),
+                          ),
                         ),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          obscureText: _isPasswordVisible,
+                          decoration: InputDecoration(
+                            hintText: 'Retype Password',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _isPasswordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.orange,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isPasswordVisible = !_isPasswordVisible;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
                         SizedBox(
-                  width: double.infinity,
-                  child: DropdownButton(
-                    value: type,
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: usertype.map((String item) {
-                      return DropdownMenuItem(
-                        value: item,
-                        child: Text(item),
-                      );
-                    }).toList(),
-                    onChanged: (String? newVal) {
-                      setState(() {
-                        type = newVal!;
-                      });
-                    },
-                  ),
-                ),
-
-
-
+                          width: double.infinity,
+                          child: DropdownButton(
+                            value: type,
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items: usertype.map((String item) {
+                              return DropdownMenuItem(
+                                value: item,
+                                child: Center(
+                                  child: Text(
+                                    item,
+                                    style: const TextStyle(
+                                      color: Colors.orange,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newVal) {
+                              setState(() {
+                                type = newVal!;
+                              });
+                            },
+                          ),
+                        ),
                         const SizedBox(height: 10),
                         CustomButton(
                           text: 'Sign Up',
@@ -149,36 +232,19 @@ String type = 'user';
                               signUpUser();
                             }
                           },
+                          color: Colors.orange,
                         )
                       ],
                     ),
                   ),
                 ),
-              ListTile(
-                tileColor: _auth == Auth.signin
-                    ? GlobalVariables.backgroundColor
-                    : GlobalVariables.greyBackgroundCOlor,
-                title: const Text(
-                  'Sign-In.',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                leading: Radio(
-                  activeColor: Color.fromRGBO(230, 46, 4, 1),
-                  value: Auth.signin,
-                  groupValue: _auth,
-                  onChanged: (Auth? val) {
-                    setState(() {
-                      _auth = val!;
-                    });
-                  },
-                ),
-              ),
               if (_auth == Auth.signin)
                 Container(
                   padding: const EdgeInsets.all(8),
-                  color: GlobalVariables.backgroundColor,
+                  decoration: BoxDecoration(
+                    color: GlobalVariables.backgroundColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Form(
                     key: _signInFormKey,
                     child: Column(
@@ -188,9 +254,25 @@ String type = 'user';
                           hintText: 'Email',
                         ),
                         const SizedBox(height: 10),
-                        CustomTextField(
+                        TextFormField(
                           controller: _passwordController,
-                          hintText: 'Password',
+                          obscureText: _isPasswordVisible,
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _isPasswordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.orange,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isPasswordVisible = !_isPasswordVisible;
+                                });
+                              },
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 10),
                         CustomButton(
@@ -200,6 +282,7 @@ String type = 'user';
                               signInUser();
                             }
                           },
+                          color: Colors.orange,
                         )
                       ],
                     ),

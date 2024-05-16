@@ -138,4 +138,7 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
+
+  
+
 }

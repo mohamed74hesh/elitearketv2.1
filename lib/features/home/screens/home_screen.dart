@@ -33,9 +33,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   fetchAllProducts() async {
-    products = await homeServices.fetchAllProducts(context);
-    setState(() {});
+  final products = await homeServices.fetchAllProducts(context);
+  if (mounted) {
+    setState(() {
+      this.products = products;
+    });
   }
+}
 
   void navigateToSearchScreen(String query) {
     if (query == null) {

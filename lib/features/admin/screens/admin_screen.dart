@@ -13,34 +13,24 @@ class AdminScreen extends StatefulWidget {
   State<AdminScreen> createState() => _AdminScreenState();
 }
 
-class _AdminScreenState extends State<AdminScreen> {
-  int _page = 0;
-  double bottomBarWidth = 42;
-  double bottomBarBorderWidth = 5;
+class _AdminScreenState extends State<AdminScreen> with TickerProviderStateMixin {
+  late TabController _tabController;
 
-  List<Widget> pages = [
-    const PostsScreen(),
-    const OrdersScreen(),
-  ];
-
-  void updatePage(int page) {
-    setState(() {
-      _page = page;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
-        child: AppBar(
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: GlobalVariables.appBarGradient,
-            ),
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: GlobalVariables.appBarGradient,
           ),
-          title: Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
@@ -49,7 +39,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   'assets/images/amazon_in.png',
                   width: 120,
                   height: 100,
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
               AccountButton(
@@ -62,82 +52,55 @@ class _AdminScreenState extends State<AdminScreen> {
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
-      body: pages[_page],
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          PostsScreen(),
+          OrdersScreen(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _page,
+        currentIndex: _tabController.index,
+        onTap: (index) => _tabController.animateTo(index),
         selectedItemColor: GlobalVariables.selectedNavBarColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
         backgroundColor: GlobalVariables.backgroundColor,
-        iconSize: 28,
-        onTap: updatePage,
+        iconSize: IconSize,
         items: [
-          // POSTS
-          BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 0
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
-                    width: bottomBarBorderWidth,
-                  ),
-                ),
-              ),
-              child: const Icon(
-                Icons.home_outlined,
-              ),
-            ),
-            label: '',
-          ),
-          // ANALYTICS
-          // BottomNavigationBarItem(
-          //   icon: Container(
-          //     width: bottomBarWidth,
-          //     decoration: BoxDecoration(
-          //       border: Border(
-          //         top: BorderSide(
-          //           color: _page == 1
-          //               ? GlobalVariables.selectedNavBarColor
-          //               : GlobalVariables.backgroundColor,
-          //           width: bottomBarBorderWidth,
-          //         ),
-          //       ),
-          //     ),
-          //     child: const Icon(
-          //       Icons.analytics_outlined,
-          //     ),
-          //   ),
-          //   label: '',
-          // ),
-          // ORDERS
-          BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: _page == 1
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
-                    width: bottomBarBorderWidth,
-                  ),
-                ),
-              ),
-              child: const Icon(
-                Icons.all_inbox_outlined,
-              ),
-            ),
-            label: '',
-          ),
+          _createBottomNavigationBarItem(Icons.home_outlined, 0),
+          _createBottomNavigationBarItem(Icons.all_inbox_outlined, 1),
         ],
       ),
     );
   }
+
+  BottomNavigationBarItem _createBottomNavigationBarItem(IconData icon, int index) {
+    return BottomNavigationBarItem(
+      icon: Container(
+        width: BottomBarWidth,
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: _tabController.index == index
+                  ? GlobalVariables.selectedNavBarColor
+                  : GlobalVariables.backgroundColor,
+              width: BottomBarBorderWidth,
+            ),
+          ),
+        ),
+        child: Icon(icon),
+      ),
+      label: '',
+    );
+  }
 }
+
+const double AppBarHeight = 50;
+const double BottomBarWidth = 42;
+const double BottomBarBorderWidth = 5;
+const double IconSize = 28;
